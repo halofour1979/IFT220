@@ -1,0 +1,24 @@
+#Sets directory to folder where system environment variables are stored
+Set-Location -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+
+#Tests is "LM_LICENSE_FILE is present
+#If so is its value set to "27000@test.university.com"
+#If not, set it
+If (Test-Path -Path LM_LICENSE_FILE) {
+    $value = Get-ItemPropertyValue -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\" -Name LM_LICENSE_FILE
+    If ($value -contains "27000@test.university.com") {
+        Write-Host "File found, value current"
+    }
+    Else {
+        $value += ",27000@test.university.com"
+        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\" -Name LM_LICENSE_FILE -Value $value
+        Write-Host "File found, value updated"
+    }
+}
+
+#if file not found, create it and add the value
+Else {
+    Write-Host "File not found"
+    New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\" -Name "LM_LICENSE_FILE"
+    New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\" -Name LM_LICENSE_FILE -Value "27000@test.university.com" 
+    }
