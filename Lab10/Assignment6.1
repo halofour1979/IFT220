@@ -1,0 +1,32 @@
+Import-Module ActiveDirectory
+$CSV = $args[0]
+if (! $CSV) {
+    Write-Host "Please format this command as 'AddUsersToGroup <csv file>'"
+    Write-Host "CSV file must have the headers 'UserName' and 'GroupName' with AD usernames and groupnames following"
+    exit
+}
+
+$users = Import-Csv "$CSV"
+
+foreach ($user in $users){
+    $name = $user.Username
+    $first = $user.FirstName
+    $last = $user.LastName
+    $desc = $user.Description
+    $ou = $user.OUPath
+    $pass = $user.Password
+    $act = $user.Action
+
+    if($act -match 'Add'){
+        New-ADUser -name $name `
+            -GivenName $first `
+            -Surname $last `
+            -Description $descr `
+            -AccountPassword (ConvertTo-SecureString $pass -AsPlainText -Force)`
+            -Path $ou
+    }
+    elseif($act -match 'Remove'){
+        Remove-ADUser $name
+    }
+
+}
