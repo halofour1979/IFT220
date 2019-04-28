@@ -1,0 +1,1 @@
+Get-ADComputer -Filter * -Properties * | Select Name, Enabled, whenCreated, whenChanged, DistinguishedName | Export-Csv Assignment8.csv -NoTypeInformation
