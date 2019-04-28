@@ -1,0 +1,8 @@
+﻿Username,FirstName,LastName,Description,OU,OUPath,Password,Action,Generic OU
+ike,Ike,Radiant,Very Radiant!,Business,"ou=Business,dc=mycedo,dc=local",Thank you class!,Add,OU1
+momo,Mamun,Adil,Manager of Sales,Business,"ou=Business,dc=mycedo,dc=local",password123!,Add,OU1
+toto,Toasty,McFly,New hire in Marketing,Engineering,"ou=Engineering,dc=mycedo,dc=local",heLikesToFly$$,Add,OU2
+momo,Mamun,Adil,Ex-Manager of Sales,Business,"ou=Business,dc=mycedo,dc=local",hegotfired.,Remove,OU1
+retail1,Retail1,Kiosk,Retail Kiosk 1,Legal,"ou=Legal,dc=mycedo,dc=local",For Kiosk 1…,Add,OU3
+retail2,Retail2,Kiosk,Retail Kiosk 2,Legal,"ou=Legal,dc=mycedo,dc=local",For Kiosk 2…,Add,OU3
+ceo,Big,Boss,She is the big boss.,RandD,"ou=RandD,dc=mycedo,dc=local","""Likes to Rule all""",Add,OU4
