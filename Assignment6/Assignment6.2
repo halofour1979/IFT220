@@ -1,0 +1,17 @@
+Import-Module ActiveDirectory
+$CSV = $args[0]
+$SGlist = Import-CSV "$CSV"
+
+foreach ($sg in $SGList) {
+    $name = $sg.Name
+    $desc = $sg.Description
+    $scope = $sg.Scope
+    $cat = $sg.Category
+    $ou = $sg.OUPath
+
+    New-ADGroup -Name $name `
+        -Description $desc `
+        -GroupScope $scope `
+        -GroupCategory $cat `
+        -Path $ou
+}
